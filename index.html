@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Git Guard">
+
+    <title>Git Guard</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Spirax'>
+
+    <!-- Tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+
+    <!-- Date Picker -->
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    <!-- Sweet Alert-->
+    <link rel="stylesheet" type="text/css" href="css/library/sweetalert.css">
+    <script src="js/library/sweetalert.min.js"></script>
+
+    <!-- Dropdown -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+
+    <!-- bubble d3 libraries -->
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,200italic,600italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+
+    <!-- D3 -->
+    <!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <!--<script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>-->
+
+    <!-- AWS Lambda-->
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.6.12.min.js"></script>
+    <script type="text/javascript">
+        // See the Configuring section to configure credentials in the SDK
+        AWS.config.credentials = {accessKeyId: '',
+        secretAccessKey: ''};
+
+        // Configure your region
+        AWS.config.region = 'ap-southeast-1';
+    </script>
+
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/header.css" rel="stylesheet">
+    <link href="css/statistics.css" rel="stylesheet">
+    <link href="css/footer.css" rel="stylesheet">
+    <link href="css/lambda.css" rel="stylesheet">
+    <link href="css/tipsy.css" rel="stylesheet">
+    <link href="css/visualization.css" rel="stylesheet">
+
+    <!-- View JavaScript -->
+    <script src="js/view/datepicker.js"></script>
+    <script src="js/view/defaulttables.js"></script>
+    <script src="js/view/division.js"></script>
+    <script src="js/view/page.js"></script>
+
+    <!-- Tipsy JavaScript -->
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <script src="js/library/jquery.tipsy.js"></script>
+    <!--<script src="js/d3.min.js"></script>-->
+
+    <!-- Generate Visualization -->
+    <script src="js/controller/analyze.js"></script>
+    <script src="js/controller/refreshvisual.js"></script>
+    <script src="js/model/retrievedata.js"></script>
+    <script src="js/model/lambda.js"></script>
+
+    <!-- Visualizations -->
+    <script src="visualizations/bubbles.js"></script>
+    <script src="visualizations/stackbarchart.js"></script>
+    <script src="visualizations/barchart.js"></script>
+    <script src="visualizations/piechart.js"></script>
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <script src="js/view/division.js"></script>
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2 class="brand-heading">Git-Guard</h2>
+                        <p></p>
+                        <p>A statistical analysis tool for git repositories</p>
+                        <p></p>
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <center>
+                                <div id="container">
+                                    <div class="content">
+                                        <div class="formElements" style="display:inline-block;">
+                                            <!--<label>Batch code:</label>-->
+                                            <!--<span><input type="text" id="txtBatchcode" name="txtBatchcode" /></span>-->
+                                            <input type="url" class="form-control" style="width: 300px; height: 50px; font-size:13pt" placeholder="Enter Git Repository URL"
+                                            id="repolink" required data-validation-required-message="Please enter the repository link">
+                                        </div>
+                                        <div class="formElements" style="display:inline-block;">
+                                            <!--<label>Course code:</label>-->
+                                            <!--<span><input type="text" id="txtCoursecode" name="txtCoursecode" /></span>-->
+                                            <input type="url" class="form-control" style="width: 300px; height: 50px; font-size:13pt" placeholder="Enter Email"
+                                            id="user_email">
+                                        </div>
+                                        <div class="formElements" style="display:inline-block;">
+                                            <!--<label>Course code:</label>-->
+                                            <!--<span><input type="text" id="txtCoursecode" name="txtCoursecode" /></span>-->
+                                            <button type="button" class="btn btn-lg btn-submit" id="upload_button" onclick="analyze(); updateUserTime();" style="width: 80px;
+                                            height: 50px; font-size: 13px">Analyse</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </center>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <a href="#introstatistics1" class="btn-social btn-outline page-scroll">
+                            <i class="fa fa-fw fa-dot-circle-o"></i>
+                        </a>
+                        <a href="#introstatistics5" class="btn-social btn-outline page-scroll">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                        </a>
+                        <a href="#introstatistics2" class="btn-social btn-outline page-scroll">
+                            <i class="fa fa-fw fa-bar-chart-o"></i>
+                        </a>
+                        <a href="#introstatistics3" class="btn-social btn-outline page-scroll">
+                            <i class="fa fa-fw fa-pie-chart"></i>
+                        </a>
+                        <a href="#introstatistics4" class="btn-social btn-outline page-scroll">
+                            <i class="fa fa-fw fa-table"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Intro to statistics -->
+    <div class="content-section-a" id="introstatistics1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="section-heading">Contribution of all authors</h2>
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <p class="lead">
+                        For the given Git repository, the contribution of all team members are extracted
+                        from GitHub Statistics API.
+                        Contribution of each team member is defined to be the total number of commits by each author.<br><br>
+                        <u>Visualization: Bubble Chart</u><br>
+                        Each bubble represents an author with its number of commits for the repository.
+                        The larger the bubbles indicates a larger %
+                        contribution in number of commits compared to other authors.
+                        Hover over each bubble to check which author and the number of commits it represents!
+                        <br><br>
+                        <u>Visualization: Table</u><br>
+                        Table with more information regarding each author's commit such as the number
+                        of additions and deletions will is displayed. The % contribution
+                        is based on the number of commits by each author.
+                    </p>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="img-responsive" src="img/bubbles.png" alt="" style="width: 500px">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section-b" id="introstatistics5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h2 class="section-heading">Number of lines of code by each author</h2>
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <img class="img-responsive" src="img/stackedbarchart.jpeg" alt="">
+                    </div>
+                    <div class="col-md-5">
+                        <p class="lead">
+                            For the given Git repository, the number of lines of code in the final
+                            project version by each team member is extracted from Github Statistics API.
+                            <br><br>
+                            <u>Visualization: Bar Chart using D3 Tip</u><br>
+                            This visualization displays the top 10 contributors in number of lines
+                            for each author. Each bar represents the % contribution of the number of lines
+                            of an author. Hover over each bar to find out the % of lines contributed
+                            by an author.
+                            <br><br>
+                            <u>Visualization: Table</u><br>
+                            As bar chart displays the top 10 contributors in number of lines in final project
+                            version, the table will be used to display the rest of the authors, together with
+                            the number of lines and % contribution.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section-a" id="introstatistics2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="lead">
+                            For the given Git repository, author and start date, the commit history is displayed
+                            on this bar chart. <br><br>
+                            <u>Visualization: Bar Chart</u><br>
+                            Each of the bar displays the addition, deletion and number of commits
+                            of each author per month.
+                            <br><br>
+                            <u>Visualization: Table</u><br>
+                            Table with more information regarding the author's commit messages and date of the commit
+                            will be displayed in the table. Note that this table only shows the author's commits that is
+                            within the most recent 300 commits.
+                        </p>
+                    </div>
+                    <div class="col-md-8">
+                        <h2 class="section-heading">Historical commit by an author</h2>
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <img class="img-responsive" src="img/stackedbarchart_hover.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="content-section-b" id="introstatistics3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img class="img-responsive" src="img/piechart.png" alt="" style="width: 500px">
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="section-heading">Number of lines of code by an author</h2>
+                            <hr class="section-heading-spacer">
+                            <div class="clearfix"></div>
+                            <p class="lead">
+                                For the given Git repository, a list of authors, start date and end date, a comparison of
+                                the commit history is displayed on this pie chart.<br><br>
+                                <u>Visualization: Pie Chart</u><br>
+                                Each of the segment in the pie chart represents % contribution of number of commits by an author.
+                                <br><br>
+                                <u>Visualization: Table</u><br>
+                                Table will display all the author's commit messages and % contribution to the project.
+                                Contribution represents the number of commits by each author.
+                            </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section-a" id="introstatistics4">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <img class="img-responsive" src="img/journal.png" alt="">
+                            </div>
+                            <div class="col-md-5">
+                                <h2 class="section-heading">Historical commit of a file by all authors</h2>
+                                <hr class="section-heading-spacer">
+                                <div class="clearfix"></div>
+                                <p class="lead">
+                                    For the given Git repository and file directory,
+                                    all the team member's commit history for a specific file is extracted from GitHub repository.<br><br>
+                                    <u>Visualization: Table</u><br>
+                                    The table displays all authors and their commit message to a specific file given in the user input.
+                                    Note that this table only shows the author's commit messages that is within the most recent 30 commits.
+                                </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div class="content-section-a" id="statistics1">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <table id="table1" class="display table table-bordered" cellspacing="0" width="100%">
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <h2 class="section-heading">Contribution of all authors</h2>
+                                    <hr class="section-heading-spacer">
+                                    <div class="clearfix"></div>
+                                    <!--<svg class="bubbles" width="600" height="600"></svg>-->
+                                    <div class="bubbleChart"></div>
+                                    <!--<img class="img-responsive" src="img/bubbles.png" alt="" style="width: 700px">-->
+                                    <!--<svg class="bubbles" width="600" height="600"></svg>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-section-b" id="statistics5">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <h2 class="section-heading">Number of lines of code by each author</h2>
+                                    <hr class="section-heading-spacer">
+                                    <div class="clearfix"></div>
+                                    <!--<img class="img-responsive" src="img/stackedbarchart.png" alt="">-->
+                                    <div class="atasBarChart"></div>
+                                </div>
+                                <div class="col-md-5">
+                                    <table id="table5" class="display table table-bordered" cellspacing="0" width="100%">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-section-a" id="statistics2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h2 class="section-heading">
+                                        Historical commit by an author
+                                    </h2>
+                                    <hr class="section-heading-spacer">
+                                    <div class="clearfix"></div>
+                                    <div class="row dropdown text-center" id="author-item">
+                                        <select class="selectpicker" data-style="btn-lg btn-list-author" data-width="300px" data-height="40px"
+                                                id="author-list" data-live-search="true" title="Select Author">
+                                        </select>
+                                        <input class="btn-lg btn-list-author" type="button" id="datepicker-start" style="width:300px; height: 40px"
+                                               value='Select Start Date                                   ▾'>
+                                        <!--<input class="btn-lg btn-list-author" type="button" id="datepicker-end" style="width:300px; height: 40px"-->
+                                        <!--value='Select End Date                                     ▾'>-->
+                                        <input class="btn-lg btn-list-author" type="button" id="ok2" onclick="reanalyze2()" style="width:300px; height: 40px"
+                                               value='Ok'>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="stackedbarchart"></div>
+                                   <!-- <div>
+                                        <button id="back" name="back" ><</button>
+                                        <button id="forward" name="forward" >></button>
+                                        <label id="currentMonth">May 2013</label>
+                                    </div> -->
+                                    <style type="text/css">
+                                      svg {
+                                        font: 10px sans-serif;
+                                        shape-rendering: crispEdges;
+                                      }
+
+                                      .axis path,
+                                      .axis line {
+                                        fill: none;
+                                        stroke: #000;
+                                      }
+                                     
+                                      path.domain {
+                                        stroke: none;
+                                      }
+                                     
+                                      .y .tick line {
+                                        stroke: #ddd;
+                                      }
+                                    </style>
+                                    <div id="stackedbarchart"></div>
+                                </div>
+                                <p></p>
+                        </div><br>
+                        <div class="row commit">
+                            <h2 class="commitH2 text-center">
+                                Select an author to show historical commits
+                            </h2>
+                            <table id="tableCommits" class="display table table-bordered" cellspacing="0" width="100%">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section-b" id="statistics3">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="section-heading">
+                                    Historical commit comparison of authors
+                                </h2>
+                                <hr class="section-heading-spacer">
+                                <!--<div class="clearfix"></div>-->
+                                <div class="pieChart"></div>
+                                <!--<img class="img-responsive" id="piechart-img" src="img/piechart.png" alt="">-->
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row" id="author-item-multiple" style="display: inline-block;">
+                                    <select class="selectpicker" multiple data-style="btn-lg btn-cv" data-width="560px" data-height="40px"
+                                    id="author-list-multiple" data-live-search="true" title="Select Authors">
+                                </select>
+                            </div>
+                            <div class="row">
+                                <input class="btn-lg btn-cv" type="button" id="datepicker-list-start" style="width:210px; height: 40px"
+                                value='Select Start Date ▾'>
+                                <input class="btn-lg btn-cv" type="button" id="datepicker-list-end" style="width:210px; height: 40px"
+                                value='Select End Date ▾'>
+                                <input class="btn-lg btn-cv" type="button" id="ok3" onclick="reanalyze3()" style="width:130px; height: 40px"
+                                value='Ok'>
+                            </div>
+                            <p></p>
+                            <table id="table3" class="display table table-bordered" cellspacing="0" width="100%">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section-a" id="statistics4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h2 class="section-heading">
+                                Historical commit of a file by all authors
+                            </h2>
+                            <hr class="section-heading-spacer">
+                            <div class="clearfix"></div>
+                            <div class="row dropdown text-center" id="file-item">
+                                <select class="selectpicker" data-style="btn-lg btn-list-author" data-width="300px" data-height="40px"
+                                id="file-list" data-live-search="true" title="Select File">
+                            </select>
+                            <input class="btn-lg btn-cv" type="button" id="ok4" style="width: 300px;" onclick="reanalyze4()"
+                            value='Ok'>
+                             </div>
+                    </div>
+                        <div class="col-md-8">
+                            <!--<img class="img-responsive" src="img/journal.png" alt="">-->
+                            <table id="table4" class="display table table-bordered" cellspacing="0" width="100%">
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lambda subscription -->
+        <section id="download" class="download bg-primary text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1>Subscribe to Notification Service</h1>
+                        <p>Receive notifications to find out how much time has passed <br>since you last ran GIT‐Guard!</p>
+                        <div class="userinput">
+                            <input type="url" class="form-control" style="height: 50px; font-size:13pt" placeholder="Enter Git Repository URL"
+                            id="repo_link1" required data-validation-required-message="Please enter the repository link">
+                            <p></p>
+                            <input type="url" class="form-control" style="height: 50px; font-size:13pt" placeholder="Enter Email"
+                            id="user_email1" required data-validation-required-message="Please enter email">
+                        </div>​
+                        <p></p>
+                        <button type="button" class="btn btn-lg btn-submit" id="upload-button1" onclick="subscribe();" style="width: 300px; height: 60px; font-size: 30px">Subscribe</button>
+                        <div id="results1"></div>
+                        <div id="results2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center" id="footer">
+            <div class="footer-below">
+                Copyright &copy; 2016 CS3219-Team12 <br>
+            </div>
+        </footer>
+    </body>
+    </html>

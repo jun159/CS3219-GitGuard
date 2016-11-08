@@ -1,0 +1,130 @@
+.content-section-a {
+    padding: 50px 0;
+    background-color: #ffffff;
+}
+
+.content-section-a h2 {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 25px;
+    color: black;
+}
+
+.content-section-a p {
+    font-size: 18px;
+    color: black;
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.content-section-b {
+    padding: 50px 0;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.content-section-b h2 {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 25px;
+    color: black;
+}
+
+.content-section-b p {
+    font-size: 18px;
+    color: black;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.btn-cv {
+     margin-top: 15px;
+     border: solid 1px black;
+     font-size: 15px;
+     color: black;
+     background: 0 0;
+     transition: all .3s ease-in-out;
+ }
+
+.btn-cv:hover,
+.btn-cv.active {
+    color: mediumpurple;
+    border: solid 1px mediumpurple;
+    background: transparent;
+}
+
+.btn-author {
+    margin-top: 15px;
+    border: solid 1px black;
+    font-size: 15px;
+    color: black;
+    background: 0 0;
+    transition: all .3s ease-in-out;
+}
+
+.btn-author:hover,
+.btn-author.active {
+    color: mediumpurple;
+    border: solid 1px mediumpurple;
+    background: transparent;
+}
+
+.btn-list-author {
+    margin-top: 15px;
+    border: solid 1px black;
+    font-size: 15px;
+    color: black;
+    background: 0 0;
+    transition: all .3s ease-in-out;
+}
+
+.btn-list-author:hover,
+.btn-list-author.active {
+    color: mediumpurple;
+    border: solid 1px mediumpurple;
+    background: transparent;
+}
+
+.btn-file {
+    margin-top: 15px;
+    border: solid 1px black;
+    font-size: 15px;
+    color: black;
+    background: 0 0;
+    transition: all .3s ease-in-out;
+}
+
+.btn-file:hover,
+.btn-file.active {
+    color: black;
+    border: solid 1px black;
+    background: transparent;
+}
+
+.ui-datepicker {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: white;
+    border: 1px solid white;
+    color: black;
+}
+
+.ui-datepicker-header {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: white;
+    border: 1px solid white;
+    color: black;
+}
+
+.ui-datepicker-calendar .ui-state-active {
+    border: 1px solid mediumpurple;
+    background: white;
+    color: mediumpurple;
+    position: relative;
+    margin: -1px;
+}
+
+/*table {*/
+    /*margin: 0 auto;*/
+    /*width: 100%;*/
+    /*clear: both;*/
+    /*border-collapse: collapse;*/
+    /*table-layout: fixed;*/
+    /*word-wrap:break-word;*/
+/*}*/
