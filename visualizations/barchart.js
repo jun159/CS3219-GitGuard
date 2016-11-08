@@ -69,9 +69,9 @@ function displayBarChart(repolink){
         .orient("left")
         .tickFormat(formatPercent);
 
-        var tip = d3.tip().attr('class', 'd3-tip').offset([-10, 0]).html(function(d) {
-          return "<strong>Lines:</strong> <span style='color:red'>" + (d.lines.toFixed(2) * 100) + "%</span>";
-        })
+        // var tip = d3.tip().attr('class', 'd3-tip').offset([-10, 0]).html(function(d) {
+        //   return "<strong>Lines:</strong> <span style='color:red'>" + (d.lines.toFixed(2) * 100) + "%</span>";
+        // })
 
         var svg = d3.select('.atasBarChart').append("svg")
         .attr("id", "atas_bar")
@@ -80,7 +80,7 @@ function displayBarChart(repolink){
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        svg.call(tip);
+        // svg.call(tip);
 
         x.domain(data.map(function(d) { return d.author; }));
         y.domain([0, d3.max(data, function(d) { return d.lines; })]);
@@ -108,8 +108,8 @@ function displayBarChart(repolink){
         .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.lines); })
         .attr("height", function(d) { return height - y(d.lines); })
-        .on('mouseover', tip.show)
-        .on('mouseout', tip.hide)
+        // .on('mouseover', tip.show)
+        // .on('mouseout', tip.hide)
 
         console.log("DONE");
 
